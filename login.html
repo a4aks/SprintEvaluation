@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>LOGIN PAGE</h1>
+    <form>
+        <div>
+            <input type = "email" id = "email" placeholder="Enter youe Email Id"/>
+        </div>
+        <div>
+            <input type = "password" id = "password" placeholder="Your Password"/>
+        </div>
+        <div>
+            <input type="submit" value = "Login">
+        </div>
+    </form>
+    <script>
+        window.addEventListener("load", function(){
+            const form = document.querySelector("form");
+            form.addEventListener("submit", handleSubmit)
+        })
+
+       async  function handleSubmit(){
+         try{
+            event.preventDefault();
+            const login = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const User = {
+                login,
+                password,
+            }
+
+            const response = await loginUser(User)
+            console.log(response)
+         }
+         catch(err){
+
+         }
+        }
+
+        function loginUser(User){
+             return fetch("https://reqres.in/api/login",{
+                 method:"POST",
+                 headers: {
+                     "Content Type":"application/json"
+                 }
+             })
+             .then(res => res.json())
+         }
+    </script>
+</body>
+</html>
